@@ -1,6 +1,6 @@
 var session = require("./session");
 console.log('thành công')
-function render(response, webconfig, username, errorMessage) {
+function render(response, webconfig, username, errorMessage, model) {
   model.getGeneralInfo(function(generalInfo) {
 
     response.render("login", {
