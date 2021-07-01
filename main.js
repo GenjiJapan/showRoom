@@ -14,7 +14,7 @@ function controller(name) {
 }
 
 router.get("/", function (request, response) {
-  controller("home").get(request, response);
+  controller("home").get(request, response, webconfig, model);
 });
 
 var datasource = require("./datasource/simple-datasource");
@@ -23,6 +23,8 @@ var model = require("./model/model").create(datasource);
 // Setup web app
 
 app.use(require("cookie-parser")());
+var multer = require('multer');
+var upload = multer({dest: 'tmp/'})
 
 
 var urlencodeParser = require("body-parser").urlencoded({ extended: false });
@@ -43,6 +45,16 @@ router.post("/login", urlencodeParser, function (request, response) {
 router.get("/logout", function (request, response) {
   console.log('success')
   controller("logout").get(request, response, webconfig);
+});
+
+router.get("/edit-general-info", function (request, response) {
+
+  controller("edit-general-info").get(request, response, webconfig, model);
+});
+
+router.post("/edit-general-info", upload.single('featureImage') , function (request, response) {
+
+  controller("edit-general-info").post(request, response, webconfig,model);
 });
 
 app.use(webconfig.root, router);
