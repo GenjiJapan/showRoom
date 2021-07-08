@@ -57,6 +57,16 @@ router.post("/edit-general-info", upload.single('featureImage') , function (requ
   controller("edit-general-info").post(request, response, webconfig,model);
 });
 
+router.get("/edit-about", function (request, response) {
+
+  controller("edit-about").get(request, response, webconfig, model);
+});
+
+router.post("/edit-about", urlencodeParser ,function (request, response) {
+
+  controller("edit-about").post(request, response, webconfig, model);
+});
+
 app.use(webconfig.root, router);
 
 app.listen(8080, function () {

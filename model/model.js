@@ -23,6 +23,22 @@ exports.create = function (datasource) {
         }
         callback(false)
       })
+    },
+    getAbout : datasource.loadAbout,
+    editAbout : function(text,callback){
+      if(text == ''){
+        callback('About text can not be empty')
+        return
+      }
+      datasource.saveAbout(text, function(err){
+        if(err){
+          callback('Could not save about text')
+          return
+        }
+        callback(false)
+      })
     }
   };
 };
+
+
